@@ -2,7 +2,7 @@
 const { getRandomInt, shuffle } = require('../../utils');
 
 const getItems = (source, max, divider) => {
-    return shuffle(source).slice(1, max).join(divider)
+    return shuffle(source).slice(0, max).join(divider)
 }
 
 const getDate = () => {
