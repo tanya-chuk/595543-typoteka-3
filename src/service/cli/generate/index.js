@@ -1,18 +1,14 @@
-'use strict';
-
 const { DEFAULT_COUNT, MAX_SENTENCES, FILE_NAME, TITLES, SENTENCES, CATEGORIES } = require('./constants');
 const { getItems, getDate } = require('./utils');
 const { getRandomInt } = require('../../utils');
 const fs = require(`fs`);
-
-const RANDOM_INT = Math.floor(Math.random() * 100);
 
 const generateOffers = (count) => (
     Array(count).fill({}).map(() => ({
         title: TITLES[getRandomInt(0, TITLES.length - 1)],
         createdDate: getDate(),
         announce: getItems(SENTENCES, getRandomInt(1, MAX_SENTENCES), ' '),
-        fullText: getItems(SENTENCES, RANDOM_INT, ' '),
+        fullText: getItems(SENTENCES, getRandomInt(0, 100), ' '),
         сategory: getItems(CATEGORIES, getRandomInt(1, CATEGORIES.length - 1), ', ')
     }))
 )

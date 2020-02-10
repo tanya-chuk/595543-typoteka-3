@@ -1,16 +1,14 @@
 
-'use strict';
-
 const DEFAULT_COMMAND = `--help`;
 
 const USER_ARGV_INDEX = 2;
 
-const EXIT_CODE = {
+const ExitCode = {
     ERROR: 1,
     SUCCESS: 0,
 };
 
-const HTTP_CODE = {
+const HttpCode = {
     OK: 200,
     UNAUTHORIZED: 401,
     FORBIDDEN: 403,
@@ -21,6 +19,6 @@ const HTTP_CODE = {
 module.exports = {
     DEFAULT_COMMAND,
     USER_ARGV_INDEX,
-    EXIT_CODE,
-    HTTP_CODE
+    ExitCode,
+    HttpCode
 }
