@@ -1,10 +1,9 @@
-
 'use strict';
 
 module.exports = {
-    name: `--help`,
-    run() {
-        const message = `
+  name: `--help`,
+  run() {
+    const message = `
     Программа запускает http-сервер и формирует файл с данными для API.
     Гайд:
     server <command>
@@ -15,6 +14,6 @@ module.exports = {
       --server <port>             запускае сервер для указанного порта
     `;
 
-        console.log(message);
-    }
+    console.log(message);
+  }
 };
