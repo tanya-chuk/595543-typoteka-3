@@ -1,6 +1,7 @@
 'use strict';
 
 const {cli} = require(`./cli`);
+const chalk = require(`chalk`);
 const {
   DEFAULT_COMMAND,
   USER_ARGV_INDEX,
@@ -18,7 +19,7 @@ if (userArguments.length === 0 || !cli[userCommand]) {
 }
 
 if (postsCount > MAX_COUNT) {
-  console.error(`Не больше 1000 публикаций`);
+  console.error(chalk.red(`Не больше 1000 публикаций`));
   process.exit(ExitCode.ERROR);
 }
 
