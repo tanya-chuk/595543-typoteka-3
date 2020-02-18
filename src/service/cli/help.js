@@ -1,4 +1,5 @@
 'use strict';
+const chalk = require(`chalk`);
 
 module.exports = {
   name: `--help`,
@@ -14,6 +15,6 @@ module.exports = {
       --server <port>             запускае сервер для указанного порта
     `;
 
-    console.log(message);
+    console.log(chalk.gray(message));
   }
 };
