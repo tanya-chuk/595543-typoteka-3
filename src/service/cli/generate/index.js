@@ -1,27 +1,36 @@
 'use strict';
 
-const {DEFAULT_COUNT, MAX_SENTENCES, FILE_NAME, TITLES, SENTENCES, CATEGORIES} = require(`./constants`);
-const {getItems, getDate} = require(`./utils`);
+const {DEFAULT_COUNT, MAX_SENTENCES, FILE_NAME} = require(`./constants`);
+const {getItems, getDate, readContent} = require(`./utils`);
 const {getRandomInt} = require(`../../utils`);
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
+const FILE_SENTENCES_PATH = `./data/sentences.txt`;
+const FILE_TITLES_PATH = `./data/titles.txt`;
+const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 
-const generateOffers = (count) => (
+const generateOffers = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
-    title: TITLES[getRandomInt(0, TITLES.length - 1)],
+    title: titles[getRandomInt(0, titles.length - 1)],
     createdDate: getDate(),
-    announce: getItems(SENTENCES, getRandomInt(1, MAX_SENTENCES), ` `),
-    fullText: getItems(SENTENCES, getRandomInt(0, 100), ` `),
-    сategory: getItems(CATEGORIES, getRandomInt(1, CATEGORIES.length - 1), `, `)
+    announce: getItems(sentences, getRandomInt(1, MAX_SENTENCES), ` `),
+    fullText: getItems(sentences, getRandomInt(0, 100), ` `),
+    сategory: getItems(categories, getRandomInt(1, categories.length - 1), `, `)
   }))
 );
 
 module.exports = {
   name: `--generate`,
   async run(args) {
+    const [sentences, titles, categories] = await Promise.all([
+      readContent(FILE_SENTENCES_PATH),
+      readContent(FILE_TITLES_PATH),
+      readContent(FILE_CATEGORIES_PATH)
+    ]);
+
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    const content = JSON.stringify(generateOffers(countOffer));
+    const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences));
 
     try {
       await fs.writeFile(FILE_NAME, content);
