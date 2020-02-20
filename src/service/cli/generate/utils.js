@@ -1,5 +1,7 @@
 'use strict';
 
+const chalk = require(`chalk`);
+const fs = require(`fs`).promises;
 const {getRandomInt, shuffle} = require(`../../utils`);
 
 const PERIOD = 90 * 24 * 60 * 60 * 1000;
@@ -15,7 +17,18 @@ const getDate = () => {
   return date.toLocaleDateString();
 };
 
+const readContent = async (filePath) => {
+  try {
+    const content = await fs.readFile(filePath, `utf8`);
+    return content.split(`\n`);
+  } catch (err) {
+    console.error(chalk.red(err));
+    return [];
+  }
+};
+
 module.exports = {
   getItems,
-  getDate
+  getDate,
+  readContent
 };
