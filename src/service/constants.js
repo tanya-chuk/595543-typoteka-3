@@ -1,8 +1,17 @@
 'use strict';
 
-const DEFAULT_COMMAND = `--help`;
+const ComandNames = {
+  help: `--help`,
+  version: `--version`,
+  generate: `--generate`,
+  server: `--server`
+};
+
+const DEFAULT_COMMAND = ComandNames.help;
 
 const USER_ARGV_INDEX = 2;
+
+const USER_COMMAND_INDEX = 3;
 
 const ExitCode = {
   ERROR: 1,
@@ -20,6 +29,8 @@ const HttpCode = {
 module.exports = {
   DEFAULT_COMMAND,
   USER_ARGV_INDEX,
+  USER_COMMAND_INDEX,
   ExitCode,
-  HttpCode
+  HttpCode,
+  ComandNames
 };

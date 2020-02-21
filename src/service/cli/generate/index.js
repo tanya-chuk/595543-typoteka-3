@@ -1,6 +1,6 @@
 'use strict';
 
-const {DEFAULT_COUNT, MAX_SENTENCES, FILE_NAME} = require(`./constants`);
+const {MAX_COUNT, DEFAULT_COUNT, MAX_SENTENCES, FILE_NAME} = require(`./constants`);
 const {getItems, getDate, readContent} = require(`./utils`);
 const {getRandomInt} = require(`../../utils`);
 const fs = require(`fs`).promises;
@@ -8,6 +8,8 @@ const chalk = require(`chalk`);
 const FILE_SENTENCES_PATH = `./data/sentences.txt`;
 const FILE_TITLES_PATH = `./data/titles.txt`;
 const FILE_CATEGORIES_PATH = `./data/categories.txt`;
+const {ComandNames} = require(`../../constants`);
+const {ExitCode} = require(`../../constants`);
 
 const generateOffers = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
@@ -20,15 +22,21 @@ const generateOffers = (count, titles, categories, sentences) => (
 );
 
 module.exports = {
-  name: `--generate`,
+  name: ComandNames.generate,
   async run(args) {
+    const [count] = args;
+
+    if (count > MAX_COUNT) {
+      console.error(chalk.red(`Не больше 1000 публикаций`));
+      process.exit(ExitCode.ERROR);
+    }
+
     const [sentences, titles, categories] = await Promise.all([
       readContent(FILE_SENTENCES_PATH),
       readContent(FILE_TITLES_PATH),
       readContent(FILE_CATEGORIES_PATH)
     ]);
 
-    const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
     const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences));
 
