@@ -1,8 +1,9 @@
 'use strict';
 const chalk = require(`chalk`);
+const {ComandNames} = require(`../constants`);
 
 module.exports = {
-  name: `--help`,
+  name: ComandNames.help,
   run() {
     const message = `
     Программа запускает http-сервер и формирует файл с данными для API.
