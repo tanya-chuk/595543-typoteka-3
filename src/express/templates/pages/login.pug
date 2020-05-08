@@ -1,13 +1,16 @@
 extends ../layouts/layout.pug
 
-block header
-    include ../includes/guest-header
+block wrapper 
+    .wrapper
 
-block content
-    include ../includes/registration-form
+        block header
+            include ../includes/guest-header
 
-block footer
-    include ../includes/footer
+        block content
+            include ../includes/registration-form
 
-block scripts
-    script(src='js/main.js')
+        block footer
+            include ../includes/footer
+
+        block scripts
+            script(src='js/main.js')
