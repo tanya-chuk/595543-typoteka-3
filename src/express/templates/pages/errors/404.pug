@@ -1,16 +1,19 @@
 
 extends ../layouts/layout.pug
 
-block header
-  include ../includes/error-page-header
-  
-block content
-  main
-    h1.visually-hidden Ошибка 404
-    section.error
-      h2.error__title.title.title--big Похоже ошиблись адресом
-      a.error__link.text.text--big(href="main.html") Вернуться на главную
+block wrapper
+  .wrapper-color
 
-block footer
-  footer.footer
-    include ../includes/footer-content
+    block header
+      include ../includes/error-page-header
+      
+    block content
+      main
+        h1.visually-hidden Ошибка 404
+        section.error
+          h2.error__title.title.title--big Похоже ошиблись адресом
+          a.error__link.text.text--big(href="main.html") Вернуться на главную
+
+    block footer
+      footer.footer
+        include ../includes/footer-content
