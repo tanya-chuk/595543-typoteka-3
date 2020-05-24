@@ -1,7 +1,7 @@
 extends ../layouts/layout.pug
 
 block header
-    include ../includes/header
+  include ../includes/header
 
 block content
   main.main-page.main-page--padding
@@ -52,10 +52,7 @@ block content
 
 block footer
   footer.footer.footer--padding
-    a.footer__copyright(href="https://htmlacademy.ru/" aria-label="HTMLAcademy")
-      img(src="/img/icons/HTMLAcademyLogo.svg" width="112" height="50" alt="HTMLAcademy")
-    span.footer__dot
-    p.footer__text Типотека, 2019
+    include ../includes/footer-content
 
 block scripts
   //
